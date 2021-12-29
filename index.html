@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+	<style type="text/css">
+		.dynamic-content {
+		    display:none;
+		}
+		ul{
+			list-style: none;
+			display: flex;
+		}
+		li{
+			padding: 2px;
+		}
+	</style>
+</head>
+<body class="container">
+	<header>
+		<h1>Navbar</h1>
+		<ul>
+			<li> 
+				<a href="/?dc=apples">
+					Apples
+				</a>
+			</li>
+			<li> 
+				<a href="/?dc=bananas">
+					Bananas
+				</a>
+			</li>
+			<li> 
+				<a href="/?dc=oranges">
+					Oranges
+				</a>
+			</li>
+		</ul>
+	</header>
+
+	<main>	
+		<!-- Default Dynamic Section -->
+		<div id="default-content" class="dynamic-content">
+		  This is the default content
+		</div>
+		<!-- Dynamic Section 1 -->
+		<div id="apples" class="dynamic-content">
+		  I like apples
+		</div>
+		<!-- Dynamic Section 2 -->
+		<div id="oranges" class="dynamic-content">
+		  I like oranges
+		</div>
+		<!-- Dynamic Section 3 -->
+		<div id="bananas" class="dynamic-content">
+		  I like bananas
+		</div>
+	</main>
+
+	<footer>
+		<h1>Footer</h1>
+	</footer>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+<script type="text/javascript">
+	// Parse the URL parameter
+	function getParameterByName(name, url) {
+	    if (!url) url = window.location.href;
+	    name = name.replace(/[\[\]]/g, "\\$&");
+	    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+	        results = regex.exec(url);
+	    if (!results) return null;
+	    if (!results[2]) return '';
+	    return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+
+	// Give the parameter a variable name
+	var dynamicContent = getParameterByName('dc');
+
+	 $(document).ready(function() {
+
+		// Check if the URL parameter is apples
+		if (dynamicContent == 'apples') {
+			$('#apples').show();
+			$("title").html("Apples")
+		} 
+		// Check if the URL parameter is oranges
+		else if (dynamicContent == 'oranges') {
+			$('#oranges').show();
+			$("title").html("Oranges")
+
+		} 
+		// Check if the URL parameter is bananas
+		else if (dynamicContent == 'bananas') {
+			$('#bananas').show();
+			$("title").html("Bananas")
+
+		} 
+		// Check if the URL parmeter is empty or not defined, display default content
+		else {
+			$('#default-content').show();
+			$("title").html("Home")
+
+		}
+	});
+</script>
+
+
+</body>
+</html>
